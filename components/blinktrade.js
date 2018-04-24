@@ -12,7 +12,10 @@ var BlinkTradeWS = require('blinktrade').BlinkTradeWS;
 var BlinkTradeRest = require("blinktrade").BlinkTradeRest;
 
 var TelegramBot = require('node-telegram-bot-api');
-var botTelegram = new TelegramBot(config.telegramToken, {polling: true});
+
+if(config.telegramToken != "" && config.telegramChatId != ""){
+	var botTelegram = new TelegramBot(config.telegramToken, {polling: true});
+}
 
 // Telegram Functions
 
