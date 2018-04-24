@@ -48,11 +48,12 @@ var totalBalanceAccountBTCAvailable = 0;
 	var preload = false;
 	var preloadBalance = false;
 	var preloadTicker = false;
-	var preloadOrders = false;
 	var preloadOrderBook = false;
 	var preloadTrades = false;
-	var preloadWallets = false;
-	var preloadLedger = false;
+	
+	var preloadOrders = true;
+	var preloadWallets = true;
+	var preloadLedger = true;
 
 	var preloadLoop = setInterval(function(){
 		if(preload == false){
@@ -98,7 +99,17 @@ var totalBalanceAccountBTCAvailable = 0;
 				});
 			}
 
-			if(!preloadOrders){
+			if(!preloadTrades){
+				$.get("/getTrades", function(data){
+					if(data != "[]"){
+						preloadTrades = true;	
+						$("#preloadTrades .loading").hide();		
+						$("#preloadTrades .loaded").show();		
+						getTrades();
+					}
+				});
+			}
+			/*if(!preloadOrders){
 				$.get("/getOrders", function(data){
 					if(data != "[]"){
 						preloadOrders = true;	
@@ -127,18 +138,8 @@ var totalBalanceAccountBTCAvailable = 0;
 						getWallets();	
 					}
 				});
-			}
+			}*/
 
-			if(!preloadTrades){
-				$.get("/getTrades", function(data){
-					if(data != "[]"){
-						preloadTrades = true;	
-						$("#preloadTrades .loading").hide();		
-						$("#preloadTrades .loaded").show();		
-						getTrades();
-					}
-				});
-			}
 		}
 		if(preloadOrders == true 
 			&& preloadBalance == true 
