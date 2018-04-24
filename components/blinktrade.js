@@ -136,12 +136,12 @@ var ticker = function(){
 				}];
 				if((ticker.high == ticker.last) && (ticker.high > variables.tickerHigh)){
 					variables.tickerHigh = ticker.last;
-					var message = "\n***** Alta do dia *****\nPreço: "+ticker.last+"\n*************************";
+					var message = "\n***** Alta do dia *****\nPreço: "+utils.numberToReal(ticker.last)+"\n*************************";
 					sendMessage(message);
 				}
 				if((ticker.low == ticker.last) && (ticker.low < variables.tickerLow)){
 					variables.tickerLow = ticker.last;
-					var message = "\n***** Baixa do dia *****\nPreço: "+ticker.last+"\n*************************";
+					var message = "\n***** Baixa do dia *****\nPreço: "+utils.numberToReal(ticker.last)+"\n*************************";
 					sendMessage(message);
 				}
 				utils.consoleLog("Ticker API");
