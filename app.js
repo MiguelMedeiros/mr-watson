@@ -63,30 +63,38 @@ var utils = require('./components/utils');
 var blinktrade = require('./components/blinktrade');
 var blockchainInfo = require('./components/blockchainInfo');
 var variables = require('./variables');
+var config = require('./config.json');
 
 // Start Watson
-utils.wakeUp();              // Wake up Mr. Watson
-utils.unhandledRejection();  // Error Handlers
-blinktrade.listenChat();	 // Listen Telegram chat
-blinktrade.orderExecuted();  // Listen to Orders Executed
-blockchainInfo.wallets();  	 // Get Cold Wallets info
+if((config.key != "") && (config.password != "") && (config.secret != "")){
 
-// Refresh Wallets every 1mins
-cron.schedule('*/1 * * * *', function(){
-	blockchainInfo.wallets();
-});
+	utils.wakeUp();              // Wake up Mr. Watson
+	utils.unhandledRejection();  // Error Handlers
+	blinktrade.listenChat();	 // Listen Telegram chat
+	blinktrade.orderExecuted();  // Listen to Orders Executed
+	blockchainInfo.wallets();  	 // Get Cold Wallets info
 
-// Start Blinktrade API (Cron Tasks: 2s clock)
-cron.schedule('*/2 * * * * *', function(){
-	blinktrade.balance();
-	blinktrade.ticker();
-	blinktrade.myOrders();
-	blinktrade.orderbook();
-	blinktrade.requestLedger();
-});
+	// Refresh Wallets every 1mins
+	cron.schedule('*/1 * * * *', function(){
+		blockchainInfo.wallets();
+	});
 
-// Start Blinktrade WS (Cron Tasks: 5s clock)
-cron.schedule('*/5 * * * * *', function(){
-	blinktrade.heartbeat();
-	blinktrade.tradeHistory();
-});
+	// Start Blinktrade API (Cron Tasks: 2s clock)
+	cron.schedule('*/2 * * * * *', function(){
+		blinktrade.balance();
+		blinktrade.ticker();
+		blinktrade.myOrders();
+		blinktrade.orderbook();
+		blinktrade.requestLedger();
+	});
+
+	// Start Blinktrade WS (Cron Tasks: 5s clock)
+	cron.schedule('*/5 * * * * *', function(){
+		blinktrade.heartbeat();
+		blinktrade.tradeHistory();
+	});
+}else{
+	utils.cleanConsole();
+	utils.consoleLog("Configuração incompleta, atualize seu arquivo config.json e tente novamente.", "red");
+	process.exit();
+}
