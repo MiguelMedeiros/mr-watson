@@ -1,0 +1,30 @@
+.preloader{
+	text-align: center;
+	display: block;
+	margin-top: 20vh; 
+	h1{
+		font-size: 1.25rem;
+	}
+	ul{
+		width: 260px;
+		margin: auto;
+		display: block;
+		font-size: 1rem;
+		margin-top: 1rem;
+		.fa{
+			margin-right: 0.25rem;
+		}
+		li{
+			list-style: none;
+			text-align: left;
+		}
+	}
+	.loaded{
+		display: none;
+	}
+	#logo{
+		top: 0;
+		left: 0;
+		height: 135px;
+	}
+}

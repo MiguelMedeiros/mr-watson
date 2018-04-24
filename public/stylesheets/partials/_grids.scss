@@ -1,0 +1,368 @@
+//main
+.main-container{
+	@include make-container();
+	display: none;
+}
+
+//columns
+.column-1{
+	@include make-col(12);
+	padding: 0 15px;
+	@include media-breakpoint-up(lg){
+		@include make-col(12);
+		padding: 0 15px;
+	}
+	@include media-breakpoint-up(xl){
+		@include make-col(3);
+		padding: 0;
+	}
+}
+.column-2{
+	@include make-col(12);
+	@include media-breakpoint-up(lg){
+		@include make-col(7);
+	}
+	@include media-breakpoint-up(xl){
+		@include make-col(5);
+	}
+}
+.column-3{
+	@include make-col(12);
+	padding: 0 15px;
+	@include media-breakpoint-up(lg){
+		@include make-col(5);
+		padding: 0 15px;
+	}
+	@include media-breakpoint-up(xl){
+		@include make-col(4);
+		padding: 0;
+	}
+}
+
+//balance
+.balance-container{
+	@include make-container();
+}
+.balance{
+	@include make-col(12);
+	span{
+		display: inline-block;
+		float: right;
+	}
+}
+
+// ticker
+.ticker-container{
+	@include make-container();
+}
+.ticker{
+	@include make-col(12);
+	margin: 1rem auto;
+	span{
+		display: inline-block;
+		float: right;
+	}
+}
+
+//trades
+.last-trades-container{
+	@include make-container();
+}
+.last-trades{
+	@include make-col(12);
+	overflow: overlay;
+	max-height: 15rem;
+	padding-right: 15px;
+	margin-bottom: 1rem;
+
+	@include media-breakpoint-up(xl){
+		max-height: 29.25rem;
+		margin-bottom: 0rem;
+	}
+
+	.last-trades-number,
+	.last-trades-average-price,
+	.last-trades-volume{
+		span{
+			display: inline-block;
+			text-align: right;
+			float: right;
+		}
+	}
+}
+
+//tradingview
+.tradingview-container{
+	@include make-container();
+}
+.tradingview{
+	@include make-col(12);
+	margin-bottom: 0.75rem; 
+	padding: 0 15px;
+	iframe{
+		min-height: 250px; 
+	}
+}
+
+//bot
+.form-container{
+	@include make-container();
+}
+.form{
+
+	@include make-col(12);
+	@include media-breakpoint-up(md){
+		@include make-col(6);
+	}
+	padding: 0 15px;
+	h2{
+		background-color: $yellow;
+	}
+	a{
+		width: 100%;
+		display: block;
+		border-radius: 0;
+		text-transform: uppercase;
+		font-weight: 600;
+		text-shadow: 1px 2px 1px rgba(0,0,0,0.5);
+		margin-top: 8px;
+		color: #fff;
+		&:hover, &:focus{
+			color: #fff;
+		}
+	}
+	input[type="text"]{
+		margin: 0.5rem auto;
+		text-align: left;
+		border-radius: 0;
+		padding: 2px 15px;
+		margin: 1px auto;
+		font-size: 0.8rem;
+		&:disabled{
+			background: #ccc;
+			color: #000;
+			border: 0;
+			padding: 3px 15px;
+		}
+	}
+	.error{
+		border: 1px solid red;
+		::placeholder {
+			color: #fff;
+		}
+	}
+}
+#form-sell{
+	h2{
+		background-color: $red;
+		margin-bottom: 0;
+	}
+}
+#form-buy{
+	margin-bottom: 1rem;
+	@include media-breakpoint-up(md){
+		margin-bottom: 0rem;
+		padding-right: 0;
+	}
+	h2{
+		background-color: $green;
+		margin-bottom: 0;
+	}
+}
+
+
+// orderbook
+.orderbook-container{
+	@include make-container();
+}
+.orderbooks{
+	//@include make-row();
+	@include make-container();
+	margin-top: 1rem;
+	@include media-breakpoint-up(md){
+		max-height: 23.25rem;
+	}
+	tr{
+		cursor: crosshair;
+	}
+	.orderbook-asks{
+		@include make-col(12);
+		margin-top: 1rem;
+		overflow: overlay;
+		max-height: 15rem;
+		padding-right: 15px;
+
+		@include media-breakpoint-up(md){
+			@include make-col(6);
+			padding-left: 15px;
+			margin-top: 0rem;
+			max-height: 23.25rem;
+		}
+		@include media-breakpoint-up(lg){
+			font-size: 0.6rem;
+		}
+		@media (min-width: 1400px){
+			font-size: 0.7rem;
+		}
+		h2{
+			background-color: $red;
+			@include media-breakpoint-up(lg){
+				font-size: 0.8rem;
+			}
+			@media (min-width: 1400px){
+				font-size: 1rem;
+			}
+		}
+		tr{
+			&:hover{
+				background-color: $red;
+				.red{
+					color: #fff;
+				}
+			}
+		}
+	}
+	.orderbook-bids{
+		@include make-col(12);
+		overflow: overlay;
+		max-height: 15rem;
+		padding-right: 15px;
+		@include media-breakpoint-up(md){
+			@include make-col(6);	
+			max-height: 23.25rem;
+		}
+		@include media-breakpoint-up(lg){
+			font-size: 0.6rem;
+		}
+		@media (min-width: 1400px){
+			font-size: 0.7rem;
+		}
+		h2{
+			background-color: $green;
+			@include media-breakpoint-up(lg){
+				font-size: 0.8rem;
+			}
+			@media (min-width: 1400px){
+				font-size: 1rem;
+			}
+		}
+		tr{
+			&:hover{
+				background-color: $green;
+				color: #000;
+				.green{
+					color: #000;
+				}
+			}
+		}
+	}
+}
+
+//info
+.info-container{
+	@include make-container();
+	margin-bottom: 15px;
+	margin-top: 1rem;
+	@include media-breakpoint-up(lg){
+		margin-top: 0;
+	}
+	&:hover{
+		.olho{
+			background: black !important;
+		}
+	}
+}
+.info{
+	@include make-col(12);
+	@include media-breakpoint-up(sm){
+		@include make-col(8);
+	}
+	h1{
+		//text-transform: uppercase;
+		font-size: 1.75rem;
+	}
+	.btn-donation{
+		margin-top: 0.5rem;
+	}
+}
+.logo-container{
+	@include make-col(12);
+	@include media-breakpoint-up(sm){
+		@include make-col(4);
+	}
+}
+.logo{
+}
+
+// Monitoring Spread
+.monitoring-spread-container{
+	@include make-container();
+}
+.monitoring-spread{
+	@include make-col(12);
+	@include media-breakpoint-up(lg){
+		font-size: 0.6rem;
+	}
+	@media (min-width: 1400px){
+		font-size: 0.7rem;
+	}
+}
+
+//orders
+.orders-container{
+	@include make-container();
+}
+.orders{
+	@include make-col(12);
+	@include media-breakpoint-up(lg){
+		font-size: 0.6rem;
+	}
+	@media (min-width: 1400px){
+		font-size: 0.7rem;
+	}
+	overflow: overlay;
+	max-height: 12rem;
+	padding-right: 15px;
+	a{
+		color: orange;
+	}
+}
+
+//ledger
+.ledger-container{
+	@include make-container();
+}
+.ledger{
+	@include make-col(12);
+	margin-top: 1rem;
+	overflow: overlay;
+	max-height: 12rem;
+	padding-right: 15px;
+}
+
+//wallets
+.wallets-container{
+	@include make-container();
+}
+.wallets{
+	@include make-col(12);
+	margin-top: 1rem;
+	max-height: 11rem;
+	overflow: overlay;
+	padding-right: 15px;
+	.wallet-balance{
+		td{
+			//border-top: 1px solid gray !important;
+			padding-top: 5px !important;
+		}
+	}
+}
+
+//assinatura
+.assinatura{
+	margin-top: 0rem;
+
+	@include media-breakpoint-up(md){
+		@include make-col(6);
+	}
+}

@@ -1,0 +1,26 @@
+.divider{
+	width: 100%;
+	background: #ccc;
+	height: 1px;
+	margin: 0.5rem auto;
+}
+
+//scrollbar
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #1c2030; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #363c4e; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}

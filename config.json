@@ -1,0 +1,14 @@
+{
+	"key": "",
+	"password": "",
+	"secret": "",
+	"currency": "BRL",
+	"brokerId": "4",
+
+	"telegramToken": "",
+	"telegramChatId": "",
+
+	"wallets": [
+		"1FgmtaGshjkgV9oj8uLm6cjWS7jRxknw4J",
+	]
+}

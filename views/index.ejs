@@ -1,0 +1,24 @@
+<%- include partials/header.ejs %>	
+	<%- include partials/preloader.ejs %>
+	<main class="main-container">
+		<div class="row">
+			<div class="column-1 order-2 order-lg-1">
+				<%- include partials/balance.ejs %>
+				<%- include partials/ticker.ejs %>
+				<%- include partials/last-trades.ejs %>
+			</div>
+			<div class="column-2 order-3 order-lg-2">
+				<%- include partials/tradingview.ejs %>
+				<%- include partials/form.ejs %>
+				<%- include partials/orderbook.ejs %>
+			</div>
+			<div class="column-3 order-1 order-lg-3">
+				<%- include partials/info.ejs %>
+				<%- include partials/spread.ejs %>
+				<%- include partials/orders.ejs %>
+				<%- include partials/ledger.ejs %>
+				<%- include partials/wallets.ejs %>
+			</div>
+		</div>
+	</main>
+<%- include partials/footer.ejs %>

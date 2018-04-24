@@ -1,0 +1,21 @@
+
+.error-message, .success-message, .alert-message{
+	width: 100%;
+	padding: 16px;
+	background: $red;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 999999;
+	color: #fff;
+	text-align: center;
+	font-weight: bold;
+	font-size: 17px;
+	display: none;
+}
+.success-message{
+	background: $green;
+}
+.alert-message{
+	background: orange;
+}
