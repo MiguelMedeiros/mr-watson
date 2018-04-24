@@ -50,7 +50,7 @@ var totalBalanceAccountBTCAvailable = 0;
 	var preloadTicker = false;
 	var preloadOrderBook = false;
 	var preloadTrades = false;
-	
+
 	var preloadOrders = true;
 	var preloadWallets = true;
 	var preloadLedger = true;
@@ -109,6 +109,7 @@ var totalBalanceAccountBTCAvailable = 0;
 					}
 				});
 			}
+
 			/*if(!preloadOrders){
 				$.get("/getOrders", function(data){
 					if(data != "[]"){
@@ -150,6 +151,14 @@ var totalBalanceAccountBTCAvailable = 0;
 			&& preloadWallets == true
 			&& preloadTrades == true){
 				getMonitoringSpread();
+
+				$("#preloadOrders .loading").hide();		
+				$("#preloadOrders .loaded").show();	
+				$("#preloadLedger .loading").hide();		
+				$("#preloadLedger .loaded").show();		
+				$("#preloadWallets .loading").hide();		
+				$("#preloadWallets .loaded").show();	
+				
 				$('.eye').css("background", "green");
 				$('.antena-top').css("background", "green");
 				setTimeout(function(){ 
