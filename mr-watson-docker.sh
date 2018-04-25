@@ -80,5 +80,6 @@ if [ $? = 0 ]; then
     open_browser
 else
     echo Mr Watson failed to start. Check the logs for more info: docker logs $CONTAINER
+    exit 1
 fi
 
