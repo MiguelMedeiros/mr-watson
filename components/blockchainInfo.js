@@ -2,7 +2,7 @@ var express = require('express');
 var request = require('request');
 var async = require('async');
 var config = require('./../config.json');
-var variables = require('./../variables');
+var variables = require('./variables');
 var utils = require('./utils');
 
 // *********************************************

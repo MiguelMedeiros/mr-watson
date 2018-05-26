@@ -5,7 +5,7 @@
 
 var express = require('express');
 var config = require('./../config.json');
-var variables = require('./../variables');
+var variables = require('./variables');
 var utils = require('./utils');
 
 var BlinkTradeWS = require('blinktrade').BlinkTradeWS;
@@ -45,6 +45,36 @@ var sendMessage = function(message){
 };
 
 sendMessage("\n*Mr. Watson* às suas ordens!\nSe precisar de ajuda digite /help");
+
+var myOrders = function(){
+	try {
+		blinktraderest.myOrders().then(function(data) {
+			variables.orderstemp = data.OrdListGrp;
+			if(config.consoleLog){
+				utils.consoleLog("Orders API");
+			}
+		});
+	} catch (err) {
+		utils.consoleLog("Orders API Error", 'yellow');
+	}
+};
+
+var orderbook = function(){
+	try {
+		blinktraderest.orderbook({
+			"limit": 100
+		}).then(function(data) {
+			if(data){
+				variables.orderbooktemp = data;
+				if(config.consoleLog){
+					utils.consoleLog("Orderbook API");
+				}
+			}
+		});
+	} catch (e) {
+		utils.consoleLog("Orderbook Error", 'yellow');
+	}
+};
 
 var postOrder = function(side, price, amount){
 	var sendOrderReturn = {
@@ -244,19 +274,6 @@ var balance = function() {
 	}
 };
 
-var myOrders = function(){
-	try {
-		blinktraderest.myOrders().then(function(data) {
-			variables.orderstemp = data.OrdListGrp;
-			if(config.consoleLog){
-				utils.consoleLog("Orders API");
-			}
-		});
-	} catch (err) {
-		utils.consoleLog("Orders API Error", 'yellow');
-	}
-};
-
 var requestLedger = function(){
 	try {
 		blinktraderest.requestLedger().then(function(ledger) {
@@ -271,23 +288,6 @@ var requestLedger = function(){
 		});
 	} catch (e) {
 		utils.consoleLog("Ledger GET Error", 'yellow');
-	}
-};
-
-var orderbook = function(){
-	try {
-		blinktraderest.orderbook({
-			"limit": 100
-		}).then(function(data) {
-			if(data){
-				variables.orderbooktemp = data;
-				if(config.consoleLog){
-					utils.consoleLog("Orderbook API");
-				}
-			}
-		});
-	} catch (e) {
-		utils.consoleLog("Orderbook Error", 'yellow');
 	}
 };
 

@@ -11,7 +11,7 @@ var cron = require('node-cron');
 var utils = require('./components/utils');
 var blinktrade = require('./components/blinktrade');
 var blockchainInfo = require('./components/blockchainInfo');
-var variables = require('./variables');
+var variables = require('./components/variables');
 var config = require('./config.json');
 
 var index = require('./routes/index');

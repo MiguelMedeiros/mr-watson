@@ -1,5 +1,5 @@
 var express = require('express');
-var variables = require('./../variables');
+var variables = require('./../components/variables');
 var blinktrade = require('./../components/blinktrade');
 var router = express.Router();
 
