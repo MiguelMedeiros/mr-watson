@@ -7,8 +7,16 @@ router.get('/', function(req, res, next) {
 	res.render('index', {}); 
 });
 
+router.get('/getBalance', function(req, res, next){
+	res.send(JSON.stringify(variables.balance));
+}); 
+
+router.get('/getTotalBalance', function(req, res){
+    res.send(JSON.stringify(variables.balance.totalBalanceBRL));
+});
+
 router.get('/getTicker', function(req, res, next) {
-	res.send(JSON.stringify(variables.Ticker));
+	res.send(JSON.stringify(variables.ticker));
 });
 
 router.get('/getOrders', function(req, res, next){
@@ -40,75 +48,67 @@ router.get('/getWallets', function(req, res, next){
 });
 
 router.post('/postOrder', function(req, res, next){
-	var error = false;
+	var sendOrderReturn = {
+		"error": false,
+		"order": null
+	};
 	if(req.body.side){
-		side = req.body.side;
+		var side = req.body.side;
 	}else{
-		error = true;
+		sendOrderReturn.error = true;
 	}
 	if(req.body.price){
-		price = req.body.price;
+		var price = req.body.price;
 	}else{
-		error = true;
+		sendOrderReturn.error = true;
 	}
 	if(req.body.amount){
-		amount = req.body.amount;
+		var amount = req.body.amount;
 	}else{
-		error = true;
+		sendOrderReturn.error = true;
 	}
-	if(error == false){
-		blinktrade.postOrder(side, price, amount);
+	if(sendOrderReturn.error === false){
+		var promiseOrder = new Promise(function(resolve, reject) {
+		  resolve(blinktrade.postOrder(side, price, amount));
+		});
+		promiseOrder.then(function(value) {
+			res.send(value);
+		}).catch(function(e) {
+			console.log(e);
+			res.send(sendOrderReturn);
+		});
+	}else{
+		res.send(sendOrderReturn);
 	}
-	res.send(error);
 });
 
 router.post('/cancelOrder', function(req, res, next){
-	var error = false;
+	var sendOrderReturn = {
+		"error": false,
+		"order": null
+	};
 	if(req.body.orderID){
-		orderID = req.body.orderID;
+		var orderID = req.body.orderID;
 	}else{
-		error = true;
+		sendOrderReturn.error = true;
 	}
 	if(req.body.orderID){
-		ClOrdID = req.body.ClOrdID;
+		var ClOrdID = req.body.ClOrdID;
 	}else{
-		error = true;
+		sendOrderReturn.error = true;
 	}
-	if(error == false){
-		blinktrade.cancelOrder(orderID,ClOrdID);
+	if(sendOrderReturn.error === false){
+		var promiseOrder = new Promise(function(resolve, reject) {
+		  resolve(blinktrade.cancelOrder(orderID,ClOrdID));
+		});
+		promiseOrder.then(function(value) {
+			res.send(value);
+		}).catch(function(e) {
+			console.log(e);
+			res.send(sendOrderReturn);
+		});		
 	}
-	res.send(error);
-});
-
-router.get('/getBalance', function(req, res, next){
-	var BRL_locked = "";
-	var BTC_locked = "";
-	if (variables.infoBalanceBRL.BRL_locked > 0) {
-		BRL_locked = parseFloat(variables.infoBalanceBRL.BRL_locked / 1e8).toFixed(2);
-	}else{
-		BRL_locked = 0;
-	}
-	if (variables.infoBalanceBRL.BTC_locked > 0) {
-		BTC_locked = parseFloat(variables.infoBalanceBRL.BTC_locked / 1e8).toFixed(6);
-	}else{
-		BTC_locked = 0;
-	}
-	res.send(JSON.stringify({ 
-		BRL: parseFloat(variables.infoBalanceBRL.BRL / 1e8).toFixed(2), 
-		BTC: parseFloat(variables.infoBalanceBRL.BTC / 1e8).toFixed(6), 
-		BRL_locked: BRL_locked, 
-		BTC_locked: BTC_locked, 
-		ClientID: variables.ClientID }));
-}); 
-
-router.get('/getTotalBalance', function(req, res){
-	totalBalance = 0;
-	if(variables.Ticker[0]){
-		totalBalanceBRL = variables.infoBalanceBRL.BRL + variables.infoBalanceBRL.BRL_locked;
-		totalBalanceBTC = (variables.infoBalanceBRL.BTC/1e8) * variables.Ticker[0].LastPx;
-		totalBalance = (totalBalanceBRL/1e8) + totalBalanceBTC;
-	}
-    res.send(JSON.stringify(totalBalance));
+	res.send(sendOrderReturn);
 });
 
 module.exports = router;

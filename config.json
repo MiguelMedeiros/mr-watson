@@ -10,5 +10,7 @@
 
 	"wallets": [
 		"1FgmtaGshjkgV9oj8uLm6cjWS7jRxknw4J"
-	]
+	],
+
+	"consoleLog": false
 }

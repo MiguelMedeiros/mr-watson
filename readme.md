@@ -76,6 +76,7 @@ Complete todos os campos com as informações dos passos anteriores.
 
 ## Exchanges integradas
 - [Foxbit - Brasil](https://foxbit.com.br/)
+- [Bitcambio - Brasil](https://bitcambio.com.br/)
 - [ChileBit - Chile](https://chilebit.net/)
 - [SurBitcoin - Venezuela](https://surbitcoin.com/)
 - [VBTC - Vietnã](https://vbtc.exchange/)

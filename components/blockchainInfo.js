@@ -11,7 +11,6 @@ var utils = require('./utils');
 // *********************************************
 var wallets = function(){
 	try {
-		utils.consoleLog("Blockchain.Info API");
 		async.forEachOf(config.wallets, (value, key, callback) => {
 			request('https://blockchain.info/q/addressbalance/'+value, function (error, response, body) {
 				variables.wallets[key] = {
@@ -20,15 +19,21 @@ var wallets = function(){
 				};
 			});
 		}, err => {
-		    if (err) console.error(err.message);
+		    if (err) {
+		    	console.error(err.message);
+		    }
 		});
+
+		if(config.consoleLog){
+			utils.consoleLog("Blockchain.Info API");
+		}
 	} catch (err) {
 		utils.consoleLog("Error: "+err, "red");
 	}
-}
+};
 
 // Export Functions
 module.exports = {
 	wallets: wallets
-}
+};
 
